@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principia - Account Deletion Request</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></svg>') repeat;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: rotate(0deg) translateX(0px); }
+            100% { transform: rotate(360deg) translateX(10px); }
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border-left: 4px solid #2a5298;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #2a5298;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+            padding-left: 70px;
+            transition: transform 0.2s ease;
+        }
+        
+        .steps li:hover {
+            transform: translateX(5px);
+        }
+        
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #2a5298, #667eea);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .email-info {
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .email-address {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1976d2;
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .subject-line {
+            font-weight: bold;
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .highlight {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+        }
+        
+        .highlight strong {
+            color: #f57c00;
+        }
+        
+        .data-info {
+            background: #f3e5f5;
+            border: 1px solid #9c27b0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .data-info h3 {
+            color: #7b1fa2;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            background: #f5f5f5;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 12px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .steps li {
+                padding-left: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Principia</h1>
+            <p>Account Deletion Request Instructions</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"/>
+                    </svg>
+                    How to Request Account Deletion
+                </h2>
+                
+                <p>To request the deletion of your Principia app account and associated data, please follow these simple steps:</p>
+                
+                <ol class="steps">
+                    <li>
+                        <strong>Open your email application</strong><br>
+                        Use your preferred email client or webmail service.
+                    </li>
+                    
+                    <li>
+                        <strong>Compose a new email</strong><br>
+                        Create a new email message with the following details:
+                        
+                        <div class="email-info">
+                            <div><strong>Send to:</strong></div>
+                            <div class="email-address">datascience.ml.services@gmail.com</div>
+                            
+                            <div style="margin-top: 15px;"><strong>Subject line (required):</strong></div>
+                            <div class="subject-line">Account Deletion</div>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <strong>Include your account email</strong><br>
+                        In the email body, clearly state the email address associated with your Principia account that you want to delete.
+                        
+                        <div class="highlight">
+                            <strong>Important:</strong> The email must contain the exact email address linked to your Principia account.
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <strong>Send the email</strong><br>
+                        Review your request and send the email. You will receive a confirmation once your request has been processed.
+                    </li>
+                </ol>
+            </div>
+            
+            <div class="section">
+                <h2>
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/>
+                    </svg>
+                    Processing Timeline
+                </h2>
+                
+                <p>Your account deletion request will be processed within <strong>7 business days</strong> from the time we receive your email.</p>
+                
+                <div class="highlight">
+                    <strong>Note:</strong> Business days are Monday through Friday, excluding holidays. Weekends are not counted in the processing time.
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9,10H7V12H9V10M13,10H11V12H13V10M17,10H15V12H17V10M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z"/>
+                    </svg>
+                    Data Retention Policy
+                </h2>
+                
+                <div class="data-info">
+                    <h3>What happens to your data:</h3>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Account Data:</strong> Completely deleted within 7 business days</li>
+                        <li><strong>Personal Information:</strong> Permanently removed from our systems</li>
+                        <li><strong>App Usage Data:</strong> Fully deleted</li>
+                        <li><strong>Backup Data:</strong> Removed from all backup systems</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight">
+                    <strong>Complete Data Removal:</strong> No user data is kept after account deletion. Your information will be permanently removed from the Principia app and all associated systems.
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"/>
+                    </svg>
+                    Important Information
+                </h2>
+                
+                <ul style="margin-left: 20px;">
+                    <li><strong>Irreversible Action:</strong> Account deletion cannot be undone. Please ensure you want to permanently delete your account.</li>
+                    <li><strong>App Access:</strong> Once deleted, you will no longer be able to access your Principia account or any associated data.</li>
+                    <li><strong>Email Confirmation:</strong> You will receive a confirmation email once your account has been successfully deleted.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>This page provides account deletion instructions for the Principia app as required by Google Play Store policies.</p>
+            <p style="margin-top: 10px;">For other inquiries, please contact us at the email address provided above.</p>
+        </div>
+    </div>
+</body>
+</html>
